@@ -2,6 +2,8 @@
 
 Unshackle is an open-source tool to bypass Windows and Linux user passwords from a bootable USB based on Linux.
 
+---
+
 ### Requirements
 
 To use Unshackle, you need:
@@ -9,6 +11,8 @@ To use Unshackle, you need:
 1. Unshackle ISO
 2. Rufus
 3. USB pen drive
+
+---
 
 ### Usage
 
@@ -20,19 +24,28 @@ To use Unshackle, you need:
 6. Let the process finish, then reboot your system.
 7. For Windows, press Shift five times on the lock screen.
 
+
+---
+
 ### License
 
 The program, libraries, etc., are licensed under the GNU General Public License.
 
+---
+
 ### Disclaimer
 
 This tool is for educational purposes only. Do not use it for any illegal activities or unauthorized access. Use it at your own risk. We are not liable for any damage caused by its use.
+
+---
 
 ### Tested systems
 
 Tested on :
 <br>
 Windows 10 pro x64
+
+---
 
 ### TO-DO list
 
@@ -50,7 +63,8 @@ Windows 10 pro x64
 🟡 = Under development
 ❌ = Planned  
 
-### Note
+---
 
+### Note
 Linux bypass is still under development.
 
