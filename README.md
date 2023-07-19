@@ -42,7 +42,7 @@ Windows 10 pro x64
 | Support windows | ✅
 | Simple CLI | ✅
 | Support linux  | 🟡
-| Video tutorial | 🟡
+| Tutorial video  | 🟡
 | easy to build  | ❌
 | Simple GUI  | ❌
 
