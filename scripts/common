@@ -1,0 +1,66 @@
+# Set colors variables
+RED="$(tput setaf 1)"
+GREEN="$(tput setaf 2)"
+BLUE="$(tput setaf 6)"
+YELLOW="$(tput setaf 3)"
+PURPLE="$(tput setaf 5)"
+NORMAL="$(tput sgr0)"
+
+blue_echo() {
+  echo "${BLUE}${1}${NORMAL}"
+}
+
+done_echo() {
+  echo "${GREEN}${1}${NORMAL}"
+}
+
+failed_echo() {
+  echo "${RED}${1}${NORMAL}"
+  enter_to_quit
+	exit 1
+}
+
+prompt() {
+  printf '%s' "$1"
+  read -r "$2"
+}
+
+
+
+center_text() {
+  if [ "$is_colored" = true ]; then
+    length="$((${#1} + 11))" # Add 11 to fix colored text (color codes are 11 characters long)
+  else
+    length="${#1}"
+  fi
+  printf "%*s\n" "$((($(tput cols) + length) / 2))" "$1"
+}
+
+unshackle_logo() {
+  clear
+  filling_lines="$((($(tput lines) - 5) / 2))" # Calculate number of filling lines
+  i=1
+  while [ "$i" -le "$filling_lines" ]; do # If $i is less or equal to filling_lines
+    echo
+    i="$(( i + 1 ))"
+  done
+  is_colored=false
+  center_text "                 _                _    _"
+  center_text "                | |              | |  | |"
+  center_text " _   _ _ __  ___| |__   __ _  ___| | _| | ___"
+  center_text "| | | | '_ \\/ __| '_ \\ / _\` |/ __| |/ / |/ _ \\"
+  center_text "| |_| | | | \\__ \ | | | (_| | (__|   <| |  __/"
+  center_text " \\__,_|_| |_|___/_| |_|\\__,_|\\___|_|\\_\\_|\\___|"
+}
+
+
+
+     
+    
+
+
+
+
+                                              
+                                              
+

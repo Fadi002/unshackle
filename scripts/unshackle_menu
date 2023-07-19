@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+# Load functions and variables
+. /usr/bin/common
+unshackle_VERSION="1.0"
+
+export NEWT_COLORS='root=,black
+border=white,black
+title=white,black
+roottext=red,black
+window=red,black
+textbox=white,black
+button=black,green
+compactbutton=white,black
+listbox=white,black
+actlistbox=black,white
+actsellistbox=black,green
+checkbox=green,black
+actcheckbox=black,green
+'
+
+whiptail_height="$(($(tput lines) - 6))"
+whiptail_width="$(($(tput cols) - 20))"
+
+while true; do
+  CHOICE="$(whiptail --nocancel --title "unshackle $unshackle_VERSION | use arrow keys" --menu '' $whiptail_height $whiptail_width 9 \
+    '1' 'unshackle' \
+    '2' 'Shell' \
+    '3' 'Shut down' \
+    '4' 'Reboot' 3>&1 1>&2 2>&3)"
+  case "$CHOICE" in
+    1)
+      clear
+      /usr/bin/unshackle_options
+      ;;
+    2)
+      clear
+      /bin/bash -i && exit
+      ;;
+    3)
+      unshackle_logo
+      sleep 2
+      /sbin/poweroff
+      ;;
+    4)
+      unshackle_logo
+      sleep 2
+      /sbin/reboot
+      ;;
+  esac
+done
+

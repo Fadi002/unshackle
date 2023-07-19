@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+# Load functions and variables
+. /usr/bin/common
+arg=$(cat /usr/bin/.args)
+args=$(echo $arg)
+jbt=$(cat /usr/bin/.jbtype)
+jbtype=$(echo $jbt)
+
+export NEWT_COLORS='root=,black
+border=white,black
+title=white,black
+roottext=red,black
+window=red,black
+textbox=white,black
+button=black,green
+compactbutton=white,black
+listbox=white,black
+actlistbox=black,white
+actsellistbox=black,green
+checkbox=green,black
+actcheckbox=black,green
+'
+
+whiptail_height="$(($(tput lines) - 6))"
+whiptail_width="$(($(tput cols) - 20))"
+
+
+while true; do
+  CHOICE="$(whiptail --nocancel --title "unshackle | use arrow keys" --menu \
+    "
+  Select Your OS: $args" $whiptail_height $whiptail_width 8 \
+    '1' 'windows' \
+    '2' 'linux' \
+    '3' 'Exit' 3>&1 1>&2 2>&3)"
+  case "$CHOICE" in
+    1)
+      clear
+      /usr/bin/unshackle --windows
+      sleep 2
+      enter_to_quit
+      /usr/bin/unshackle_menu
+      ;;
+    2)
+      clear
+      /usr/bin/unshackle --linux
+      sleep 2
+      enter_to_quit
+      /usr/bin/unshackle_menu
+      ;;
+     3)
+      clear
+      /usr/bin/unshackle_menu
+      ;;
+  esac
+done
+
