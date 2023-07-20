@@ -36,6 +36,14 @@ To use Unshackle, you need:
 6. Let the process finish, then reboot your system.
 7. For Windows, press Shift five times on the lock screen.
 
+## Donation
+if you liked the project feel free to donate!
+
+BNB : 0xAF0445f3eEDd7f113a47D3a339820F5b4B1F700c
+BTC : bc1q5dedemhl64lqrcjpa226l9sf3hx2l9zm6mzszf
+ETH : 0xAF0445f3eEDd7f113a47D3a339820F5b4B1F700c
+LTC : ltc1qcu8z2wuexn4lq9em4taerkxcxca267lyg8xac8
+
 ## Disclaimer
 
 This tool is for educational purposes only. Do not use it for any illegal activities or unauthorized access. Use it at your own risk. We are not liable for any damage caused by its use.
