@@ -1,6 +1,6 @@
 ### Unshackle - Password Bypass Tool
 
-Unshackle is an open-source tool to bypass Windows and Linux user passwords from a bootable USB based on Linux.
+Unshackle is an open-source tool to bypass Windows and Linux user passwords from a bootable USB based on Linux. (Linux bypass is still under development)
 
 To-Do List:
 
@@ -39,9 +39,6 @@ To use Unshackle, you need:
 ## Disclaimer
 
 This tool is for educational purposes only. Do not use it for any illegal activities or unauthorized access. Use it at your own risk. We are not liable for any damage caused by its use.
-
-## Note
-Linux bypass is still under development.
 
 ## License
 
