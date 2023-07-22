@@ -64,7 +64,7 @@ def find_windows_partitions():
 if sys.argv[1] == '--windows':
     find_windows_partitions()
 elif sys.argv[1] == '--linux':
-    print('not suppotred yet')
+    print('not supported yet')
 else:
     pass
 input("press enter to return")
