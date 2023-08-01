@@ -1,5 +1,5 @@
 <h1 align="center">
- <img src="[image-url-here](https://media.discordapp.net/attachments/1124408428333367367/1135886585594920960/download.png?width=946&height=409)" />
+ <img src="[image-url-here](https://media.discordapp.net/attachments/1124408428333367367/1135886585594920960/download.png)" />
 </h1>
 ### Unshackle - Password Bypass Tool
 
