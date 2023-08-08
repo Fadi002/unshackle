@@ -66,11 +66,13 @@ You need to disable secure boot in the motherboard settings.
 The uninstall command for Windows has a bug (99% of the time) that causes it to fail, but you can manually uninstall it.
 <details>
   <summary>uninstall commands</summary>
+<pre>
 ```batch
 takeown /F "%SystemRoot%\System32\sethc.exe" /A
 takeown /F "%SystemRoot%\System32\sethc.exe.old" /A
 del /f "%SystemRoot%\System32\sethc.exe"
 move /y "%SystemRoot%\System32\sethc.exe.old" "%SystemRoot%\System32\sethc.exe"
 ```
+</pre>
 </details>
 
