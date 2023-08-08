@@ -2,6 +2,8 @@
 #include <string>
 #include <vector>
 #include <windows.h>
+#include <fstream>
+#include <cstdlib>
 #include <lm.h>
 #pragma comment(lib, "netapi32.lib")
 std::vector<std::wstring> getWindowsUsers() {
@@ -31,6 +33,50 @@ std::vector<std::wstring> getWindowsUsers() {
     }
 
     return users;
+}
+std::string gettemp() {
+    char tempPath[MAX_PATH];
+    GetTempPathA(MAX_PATH, tempPath);
+
+    std::srand(static_cast<unsigned int>(std::time(nullptr)));
+    std::string tempFileName = "batch_script_" + std::to_string(std::rand()) + ".bat";
+    return std::string(tempPath) + "\\" + tempFileName;
+}
+
+void uninstall() {
+    const char* batchScript =
+        "@echo off\n"
+        "echo Trying to uninstall unshackle\n"
+        "timeout 3\n"
+        "setlocal\n\n"
+        "if exist \"%SystemRoot%\\System32\\sethc.exe\" (\n"
+        "    echo Removing sethc.exe...\n"
+        "    del /f \"%SystemRoot%\\System32\\sethc.exe\"\n"
+        "    echo sethc.exe successfully removed.\n\n"
+        "    if exist \"%SystemRoot%\\System32\\sethc.exe.old\" (\n"
+        "        echo Renaming sethc.exe.old to sethc.exe...\n"
+        "        move /y \"%SystemRoot%\\System32\\sethc.exe.old\" \"%SystemRoot%\\System32\\sethc.exe\"\n"
+        "        echo sethc.exe.old successfully renamed to sethc.exe.\n"
+        "    ) else (\n"
+        "        echo sethc.exe.old not found. No action taken.\n"
+        "    )\n"
+        ") else (\n"
+        "    echo sethc.exe not found. No action taken.\n"
+        ")\n\n"
+        "endlocal\n"
+        "del \"%~f0\"\n";
+    std::string temppath = gettemp();
+    std::ofstream batchFile(temppath);
+    if (batchFile.is_open()) {
+        batchFile << batchScript;
+        batchFile.close();
+        std::string command = "start " + temppath;
+        system(command.c_str());
+        exit(1337);
+    }
+    else {
+        std::cerr << "Unable to create batch script file." << std::endl;
+    }
 }
 
 void clear() {
@@ -72,6 +118,7 @@ void help() {
 !poweroff - shutdown the pc
 !clear - clear the console
 !shell - open cmd here
+!uninstall - remove unshackle
 !exit - close the toolkit
 )";
 }
@@ -140,6 +187,9 @@ int main() {
         }
         else if (choice == "!users") {
             Get_users();
+        }
+        else if (choice == "!uninstall") {
+            uninstall();
         }
     }
 
