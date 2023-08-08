@@ -3,7 +3,7 @@
 <p align="center">
 <a href="#"><img src="https://media.discordapp.net/attachments/1124408428333367367/1135886585594920960/download.png" height="200"></a>
 </p>
-Unshackle is an open-source tool to bypass Windows and Linux user passwords from a bootable USB based on Linux. (Linux bypass is still under development)
+Unshackle is an open-source tool to bypass Windows and Linux user passwords from a bootable USB based on Linux.
 
 Contributions are welcomed.
 
@@ -14,7 +14,7 @@ To-Do List:
 | Easy to use | ✅
 | Support windows | ✅
 | Simple CLI | ✅
-| Support linux  | 🟡
+| Support linux  | ✅
 | Tutorial video  | 🟡
 | easy to build  | ❌
 | Simple GUI  | ❌
@@ -59,3 +59,16 @@ This tool is for educational purposes only. Do not use it for any illegal activi
 ## License
 
 The program, libraries, etc., are licensed under the GNU General Public License.
+
+## Notes
+Linux support is in beta, so expect bugs.
+You need to disable secure boot in the motherboard settings.
+The uninstall command for Windows has a bug (99% of the time) that causes it to fail, but you can manually uninstall it.
+<details>
+  <summary>uninstall commands</summary>
+takeown /F "%SystemRoot%\System32\sethc.exe" /A
+takeown /F "%SystemRoot%\System32\sethc.exe.old" /A
+del /f "%SystemRoot%\System32\sethc.exe"
+move /y "%SystemRoot%\System32\sethc.exe.old" "%SystemRoot%\System32\sethc.exe"
+</details>
+
