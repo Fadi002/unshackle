@@ -91,6 +91,7 @@ umount -v rootfs/{dev,sys,proc}
 # Copy files
 cp "../unshackle" rootfs/usr/bin/unshackle
 cp "../sethc.exe" rootfs/usr/sbin/sethc.exe
+cp "../payload.sh" rootfs/usr/sbin/payload.sh
 chmod +x rootfs/usr/bin/unshackle
 cp -av ../inittab rootfs/etc
 cp -v ../scripts/* rootfs/usr/bin
