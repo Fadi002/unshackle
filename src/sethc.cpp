@@ -49,6 +49,8 @@ void uninstall() {
         "echo Trying to uninstall unshackle\n"
         "timeout 3\n"
         "setlocal\n\n"
+        "takeown /A /F \"%SystemRoot%\\System32\\sethc.exe\""
+        "takeown /A /F \"%SystemRoot%\\System32\\sethc.exe.old\""
         "if exist \"%SystemRoot%\\System32\\sethc.exe\" (\n"
         "    echo Removing sethc.exe...\n"
         "    del /f \"%SystemRoot%\\System32\\sethc.exe\"\n"
