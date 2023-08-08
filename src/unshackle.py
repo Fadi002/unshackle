@@ -61,10 +61,62 @@ def find_windows_partitions():
                         
     if not found_windows:
         print("No Windows partitions found.")
+
+def check_for_linux(partition):
+    password_bin = os.path.join(partition, '/bin/', 'passwd');print(password_bin)
+    username_file = os.path.join(partition, '/etc/', 'passwd');print(username_file)
+    if password_bin and username_file:
+        return True
+    else:
+        return False
+
+def payload_linux(partition):
+    payload_path = os.path.join(partition, 'tmp', 'linuxpayload_unshackle.sh')
+    unshackle_payload_path = "/usr/sbin/payload.sh"
+    try:
+        shutil.copy(unshackle_payload_path, payload_path)
+        print("Payload copied successfully.")
+    except Exception as e:
+        print(f"Error while copying the payload: {e}")
+        return False
+    try:
+        subprocess.run(["chroot", partition, "/bin/bash", "-c", '"/tmp/linuxpayload_unshackle.sh"'], check=True)
+        print("Execute permission granted to the file.")
+    except subprocess.CalledProcessError as e:
+        print(f"Error granting execute permission: {e}")
+        return
+    try:
+        subprocess.run(["chroot", partition, payload_path], check=True)
+        print("Script executed successfully.")
+    except subprocess.CalledProcessError as e:
+        print(f"Error running the script: {e}")
+        return
+
+def find_linux_partitions():
+    found_linux = False
+    lsblk_output = subprocess.check_output(['lsblk', '-o', 'NAME,MOUNTPOINT,FSTYPE', '-rn']).decode('utf-8')
+    lines = lsblk_output.splitlines()
+    parts = [line.split() for line in lines if len(line.split()) > 1]
+    for part in parts:
+        if 'ext4' in part:
+            temp_dir = tempfile.mkdtemp()
+            try:
+                subprocess.run(['mount','-t','ext4', f'/dev/{part[0]}', temp_dir])
+                if check_for_linux(temp_dir):
+                    print(f"Found linux partition: /dev/{part[0]}")
+                    found_linux = True
+                    print(f'mounted at : {temp_dir}')
+                    payload_linux(temp_dir)
+                    break
+                subprocess.run(['umount', temp_dir])
+            except Exception as e:
+                print(f"Error mounting /dev/{part[0]}: {str(e)}")
+    if not found_linux:
+        print("No linux partitions found.")
 if sys.argv[1] == '--windows':
     find_windows_partitions()
 elif sys.argv[1] == '--linux':
-    print('not supported yet')
+    find_linux_partitions()
 else:
     pass
 input("press enter to return")
