@@ -34,7 +34,7 @@ To use Unshackle, you need:
 ## Usage
 
 1. Download the Unshackle ISO from the [releases](https://github.com/Fadi002/unshackle/releases/).
-2. Download [Rufus](https://rufus.ie/en/) (recommended).
+2. Download [etcher](https://etcher.balena.io/) (recommended).
 3. Use Rufus to burn the ISO to your USB drive.
 4. Boot from the USB and select Unshackle.
 5. Choose your OS (Windows or Linux).
@@ -66,12 +66,9 @@ You need to disable secure boot in the motherboard settings.
 The uninstall command for Windows has a bug (99% of the time) that causes it to fail, but you can manually uninstall it.
 <details>
   <summary>Uninstall Commands</summary>
-<pre>
-<code class="language-batch">takeown /F "%SystemRoot%\System32\sethc.exe" /A
+<pre>takeown /F "%SystemRoot%\System32\sethc.exe" /A
 takeown /F "%SystemRoot%\System32\sethc.exe.old" /A
 del /f "%SystemRoot%\System32\sethc.exe"
-move /y "%SystemRoot%\System32\sethc.exe.old" "%SystemRoot%\System32\sethc.exe"</code>
-</pre>
+move /y "%SystemRoot%\System32\sethc.exe.old" "%SystemRoot%\System32\sethc.exe"</pre>
 </details>
-
 
