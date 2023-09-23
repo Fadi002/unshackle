@@ -10,7 +10,7 @@ def check_for_ntoskrnl(partition):
 
 def inject_sethc(partition):
     sethc_path = os.path.join(partition, 'Windows', 'System32', 'sethc.exe')
-    new_sethc_path = "/usr/sbin/sethc.exe"
+    new_sethc_path = "/usr/sbin/removal_util.exe"
     if not os.path.exists(sethc_path):
         print("Original sethc.exe not found. Aborting.")
         return False
@@ -27,6 +27,26 @@ def inject_sethc(partition):
     except Exception as e:
         print(f"Error while copying new sethc.exe: {e}")
         return False
+    
+def inject_utilman(partition):
+    utilman_path = os.path.join(partition, 'Windows', 'System32', 'utilman.exe')
+    new_utilman_path = "/usr/sbin/removal_util.exe"
+    if not os.path.exists(utilman_path):
+        print("Original utilman.exe not found. Aborting.")
+        return False
+    try:
+        os.rename(utilman_path, utilman_path + ".old")
+        print("Original utilman.exe renamed to utilman.exe.old")
+    except Exception as e:
+        print(f"Error while renaming utilman.exe: {e}")
+        return False
+    try:
+        shutil.copy(new_utilman_path, utilman_path)
+        print("New utilman.exe copied successfully.")
+        print("Now you can reboot to your system and use the accessibility features button")
+    except Exception as e:
+        print(f"Error while copying new utilman.exe: {e}")
+        return False
 def find_windows_partitions():
     partitions = psutil.disk_partitions()
     found_windows = False
@@ -35,7 +55,11 @@ def find_windows_partitions():
         if partition.fstype.lower() == 'ntfs':
             if check_for_ntoskrnl(partition.mountpoint):
                 print(f"Found Windows partition: {partition.device}")
-                inject_sethc(partition.device)
+                mode = input("Select a target for modification:\n1 - sethc.exe\n2 - utilman.exe\n")
+                if mode == "1":
+                    inject_sethc(partition.device)
+                else:
+                    inject_utilman(partition.device)
                 found_windows = True
                 break
     if not found_windows:
@@ -53,7 +77,10 @@ def find_windows_partitions():
                             print(f"Found Windows partition: /dev/{part[0]}")
                             found_windows = True
                             print(f'mounted at : {temp_dir}')
-                            inject_sethc(temp_dir)
+                            if mode == "1":
+                                inject_sethc(temp_dir)
+                            else:
+                                inject_utilman(temp_dir)
                             break
                         subprocess.run(['umount', temp_dir])
                     except Exception as e:
